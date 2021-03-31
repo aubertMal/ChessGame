@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("ChessGameView.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("vue/ChessGameView.fxml"));
+        primaryStage.setTitle("Mon jen d'échec");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
