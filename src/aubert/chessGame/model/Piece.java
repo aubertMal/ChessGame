@@ -9,7 +9,7 @@ public class Piece {
     private Couleur couleurPiece;
     private Path image;
 
-    public List<Case> deplacementsPossibles(int position){
+    public List<Position> deplacementsPossibles(Position position){
         return null;
     }
 }

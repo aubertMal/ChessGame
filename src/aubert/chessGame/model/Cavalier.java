@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Cavalier extends Piece{
     @Override
-    public List<Case> deplacementsPossibles(int position){
+    public List<Position> deplacementsPossibles(Position position){
         return null;
     }
 }
