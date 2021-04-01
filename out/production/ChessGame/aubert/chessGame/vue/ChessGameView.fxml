@@ -24,7 +24,7 @@
                         <Font size="25.0" />
                     </font>
                 </Text>
-                <Text layoutX="78.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Au tour des : " wrappingWidth="173.13671875">
+                <Text layoutX="67.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Au tour des : " wrappingWidth="77.99996915459633">
                     <font>
                         <Font name="Arial" size="13.0" />
                     </font>
@@ -32,6 +32,11 @@
                 <Button layoutX="67.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Annuler" />
                 <Button fx:id="boutonNouvellePartie" layoutX="67.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Nouvelle Partie" />
                 <Button layoutX="67.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Quitter" />
+            <Text fx:id="debutPartie" layoutX="75.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0000208467245">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font></Text>
+            <Text fx:id="tour" layoutX="158.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="68.13671875" />
             </children>
         </Pane>
         <GridPane fx:id="echiquier" layoutX="30.0" layoutY="63.0" prefHeight="559.0" prefWidth="800.0">
@@ -56,74 +61,326 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
          <children>
-            <Pane fx:id="pane_7_0" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pane_7_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-            <Pane fx:id="pane_7_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-            <Pane fx:id="pane_7_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-            <Pane fx:id="pane_7_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
-            <Pane fx:id="pane_7_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
-            <Pane fx:id="pane_7_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
-            <Pane fx:id="pane_7_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
-            <Pane fx:id="pane_6_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_6_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Pane fx:id="pane_5_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_5_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-            <Pane fx:id="pane_4_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_4_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-            <Pane fx:id="pane_3_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_3_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-            <Pane fx:id="pane_2_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_2_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-            <Pane fx:id="pane_1_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <Pane fx:id="pane_1_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+            <Pane fx:id="pane_0_7" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_1_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_2_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_3_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_4_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_5_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_6_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_7_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_0_6" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_1_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_2_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_3_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_4_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_5_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_6_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_7_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_0_5" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_1_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_2_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_3_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_4_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_5_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_6_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_7_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_0_4" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_1_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_2_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_3_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_4_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_5_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_6_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_7_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_0_3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_1_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_2_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_3_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_4_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_5_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_6_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_7_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_0_2" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_1_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_2_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_3_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_4_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_5_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_6_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_7_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                <children>
+                    <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </Pane>
+            <Pane fx:id="pane_0_1" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_1_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_2_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_3_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_4_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_5_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_6_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_7_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
             <Pane fx:id="pane_0_0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
                   <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane fx:id="pane_0_1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_5" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-            <Pane fx:id="pane_0_7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <Pane fx:id="pane_1_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_2_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_3_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_4_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_5_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_6_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane_7_0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="78.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
          </children>
         </GridPane>
     </children>

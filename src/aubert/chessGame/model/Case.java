@@ -8,4 +8,12 @@ public class Case {
         this.piece = piece;
         this.positionCase = positionCase;
     }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public Position getPositionCase() {
+        return positionCase;
+    }
 }

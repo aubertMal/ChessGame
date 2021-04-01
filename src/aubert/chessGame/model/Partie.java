@@ -1,7 +1,5 @@
 package aubert.chessGame.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Partie {
@@ -9,15 +7,25 @@ public class Partie {
     private List<Deplacement> deplacementsRealises;
     private Couleur turn;
 
-    public void creerNouvellePartie(){
-        List<Piece> piecesNoires = new ArrayList<>();
-        List<Piece> piecesBlanches = new ArrayList<>();
-        List<Case> cases = new ArrayList<>();
+    public Partie(Plateau plateau, List<Deplacement> deplacementsRealises, Couleur turn) {
+        this.plateau = plateau;
+        this.deplacementsRealises = deplacementsRealises;
+        this.turn = turn;
+    }
 
-        plateau = new Plateau(piecesNoires, piecesBlanches,cases);
+    public void creerNouvellePartie(){
+
         plateau.initPlateau();
         System.out.println("Début Nouvelle Partie");
 
+    }
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    public Couleur getTurn() {
+        return turn;
     }
 
     public void effectuerDeplacement(){

@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Roi extends Piece{
+    public Roi(String nom, Couleur couleurPiece, String image) {
+        super(nom, couleurPiece, image);
+    }
+
     @Override
     public List<Position> deplacementsPossibles(Position position){
         List <Position> positionsPossibles = new ArrayList<>();
@@ -20,6 +24,6 @@ public class Roi extends Piece{
         positionsPossibles.add(new Position(posX-1, posY+1));
         positionsPossibles.add(new Position(posX-1, posY-1));
 
-        return null;
+        return positionsPossibles;
     }
 }
