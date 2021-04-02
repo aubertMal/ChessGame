@@ -199,17 +199,19 @@ public class ChessGameController implements Initializable {
 //            }
 //        });
 
+        //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
         for (Map.Entry<Pane,Position> entry:mapCasePane.entrySet()) {
             Pane paneTemp = entry.getKey();
             paneTemp.setOnMouseClicked(mouseEvent -> {
                 List<Position> positionsPossibles = new ArrayList<>();
-                for (Case caseCliquee:casesEchiquier) {
-                    if (caseCliquee.getPositionCase().equals(entry.getValue())){
-                        positionsPossibles = caseCliquee.getPiece().deplacementsPossibles(entry.getValue());
+                for (Case caseEchiquier:casesEchiquier) {
+                    if (caseEchiquier.getPositionCase().equals(entry.getValue())){
+                        if (caseEchiquier.getPositionCase()!=null)
+                            positionsPossibles = caseEchiquier.getPiece().deplacementsPossibles(entry.getValue());
                     }
 
                 }
-
+                //pour chaque position possible on va chercher les panes correspondants pour highlight
                 for (Position posPossible:positionsPossibles) {
                     Pane panePossible = trouverPaneParPosition(posPossible,mapCasePane);
                     panePossible.setStyle("-fx-background-color: #641010;");
