@@ -166,7 +166,7 @@ public class ChessGameController implements Initializable {
     private Pane pane_7_7;
 
     @FXML
-    private Text debutPartie;
+    private Text infoPartie;
 
     @FXML
     private Text tour;
@@ -183,7 +183,7 @@ public class ChessGameController implements Initializable {
             initPaneListeners();
             placerPiecesBlanches();
             placerPiecesNoires();
-            debutPartie.setText("Début d'une nouvelle partie");
+            infoPartie.setText("Début d'une nouvelle partie");
             tour.setText("Blancs");
         });
 
@@ -194,17 +194,21 @@ public class ChessGameController implements Initializable {
         //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
         for (Map.Entry<Pane, Case> entry : mapCasePane.entrySet()) {
             entry.getKey().setOnMouseClicked(mouseEvent -> {
+                infoPartie.setText(" ");
                 //si la case est en highlight alors on peut y effectuer un déplacement
                 if (entry.getKey().getStyle().contains("#4C8295")){
                     //on enlève le marquage
                     initGridPane();
                     //On fait le déplacement
-                    partie.effectuerDeplacement(casePrecedente, entry.getValue(), casePrecedente.getPiece());
-                    //on met à jour le nouveauPane
-                    updateImagePane(entry.getKey(), entry.getValue());
-                    //On met à jour l'ancienPane
-                    updateImagePane(trouverPaneParCase(casePrecedente.getPositionCase(), mapCasePane),casePrecedente);
-                    System.out.println("ça marche");
+                    if (partie.effectuerDeplacement(casePrecedente, entry.getValue(), casePrecedente.getPiece())) {
+                        //on met à jour le nouveauPane
+                        updateImagePane(entry.getKey(), entry.getValue());
+                        //On met à jour l'ancienPane
+                        updateImagePane(trouverPaneParCase(casePrecedente.getPositionCase(), mapCasePane), casePrecedente);
+                        //On passe au 2ème joueur
+                        tour.setText(partie.getTurn() == Couleur.BLANC ? "Blancs" : "Noirs");
+                    } else
+                        infoPartie.setText("Ce n'est pas à votre tour de jouer");
                 }
                 // sinon on vérifie s'il y a une pièce alors on va voir ses déplacements possibles sinon la case est vide et on ne fait rien
                 else if (entry.getValue().getPiece()!=null){
@@ -346,41 +350,25 @@ public class ChessGameController implements Initializable {
 
     }
 
-    public void placerPiecesNoires() {//TODO: enlever les variables locales comme pour la liste des blanches
-        ImageView imageTourNoire = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(8).getImage()));
-        ImageView imageCavalierNoir1 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(9).getImage()));
-        ImageView imageFouNoir1 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(10).getImage()));
-        ImageView imageRoiNoir = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(11).getImage()));
-        ImageView imageReineNoire = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(12).getImage()));
-        ImageView imageFouNoir2 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(13).getImage()));
-        ImageView imageCavalierNoir2 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(4).getImage()));
-        ImageView imageTourNoire2 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(15).getImage()));
-        ImageView imagePionNoir1 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(0).getImage()));
-        ImageView imagePionNoir2 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(1).getImage()));
-        ImageView imagePionNoir3 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(2).getImage()));
-        ImageView imagePionNoir4 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(3).getImage()));
-        ImageView imagePionNoir5 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(4).getImage()));
-        ImageView imagePionNoir6 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(5).getImage()));
-        ImageView imagePionNoir7 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(6).getImage()));
-        ImageView imagePionNoir8 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(7).getImage()));
+    public void placerPiecesNoires() {
 
-        pane_0_7.getChildren().add(imageTourNoire);
-        pane_1_7.getChildren().add(imageCavalierNoir1);
-        pane_2_7.getChildren().add(imageFouNoir1);
-        pane_3_7.getChildren().add(imageRoiNoir);
-        pane_4_7.getChildren().add(imageReineNoire);
-        pane_5_7.getChildren().add(imageFouNoir2);
-        pane_6_7.getChildren().add(imageCavalierNoir2);
-        pane_7_7.getChildren().add(imageTourNoire2);
+        pane_0_7.getChildren().add(new ImageView(new Image(piecesNoires.get(8).getImage())));
+        pane_1_7.getChildren().add(new ImageView(new Image(piecesNoires.get(9).getImage())));
+        pane_2_7.getChildren().add(new ImageView(new Image(piecesNoires.get(10).getImage())));
+        pane_3_7.getChildren().add(new ImageView(new Image(piecesNoires.get(11).getImage())));
+        pane_4_7.getChildren().add(new ImageView(new Image(piecesNoires.get(12).getImage())));
+        pane_5_7.getChildren().add(new ImageView(new Image(piecesNoires.get(13).getImage())));
+        pane_6_7.getChildren().add(new ImageView(new Image(piecesNoires.get(14).getImage())));
+        pane_7_7.getChildren().add(new ImageView(new Image(piecesNoires.get(15).getImage())));
 
-        pane_0_6.getChildren().add(imagePionNoir1);
-        pane_1_6.getChildren().add(imagePionNoir2);
-        pane_2_6.getChildren().add(imagePionNoir3);
-        pane_3_6.getChildren().add(imagePionNoir4);
-        pane_4_6.getChildren().add(imagePionNoir5);
-        pane_5_6.getChildren().add(imagePionNoir6);
-        pane_6_6.getChildren().add(imagePionNoir7);
-        pane_7_6.getChildren().add(imagePionNoir8);
+        pane_0_6.getChildren().add(new ImageView(new Image(piecesNoires.get(0).getImage())));
+        pane_1_6.getChildren().add(new ImageView(new Image(piecesNoires.get(1).getImage())));
+        pane_2_6.getChildren().add(new ImageView(new Image(piecesNoires.get(2).getImage())));
+        pane_3_6.getChildren().add(new ImageView(new Image(piecesNoires.get(3).getImage())));
+        pane_4_6.getChildren().add(new ImageView(new Image(piecesNoires.get(4).getImage())));
+        pane_5_6.getChildren().add(new ImageView(new Image(piecesNoires.get(5).getImage())));
+        pane_6_6.getChildren().add(new ImageView(new Image(piecesNoires.get(6).getImage())));
+        pane_7_6.getChildren().add(new ImageView(new Image(piecesNoires.get(7).getImage())));
 
     }
 

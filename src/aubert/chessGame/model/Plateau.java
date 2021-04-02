@@ -9,14 +9,6 @@ public class Plateau {
     private List<Case> cases;
     private List<Position> positionsEchiqiers = new ArrayList<>();
 
-    public List<Piece> getPiecesNoires() {
-        return piecesNoires;
-    }
-
-    public List<Piece> getPiecesBlanches() {
-        return piecesBlanches;
-    }
-
     public List<Case> getCases() {
         return cases;
     }
@@ -27,14 +19,21 @@ public class Plateau {
         this.cases = cases;
     }
 
+    /**
+     * Initialise la plateau pour une nouvelle partie
+     * Définition des Positions, Pièces blanches, Pièces noires, Cases de l'échiquier
+     */
     public void initPlateau(){
 
         initPositions();
         initPiecesBlanches();
         initPiecesNoires();
         initCases();
-        }
+    }
 
+    /**
+     * Définit la liste des pièces blanches
+     */
     private void initPiecesBlanches() {
         piecesBlanches.add(new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
         piecesBlanches.add(new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
@@ -49,6 +48,9 @@ public class Plateau {
         }
     }
 
+    /**
+     * Définit la liste des pièces noires
+     */
     private void initPiecesNoires() {
         for (int i = 0; i < 8; i++) {
             piecesNoires.add(new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
@@ -63,6 +65,9 @@ public class Plateau {
         piecesNoires.add(new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
     }
 
+    /**
+     * Initialise les cases de l'échiquier
+     */
     private void initCases() {
         //on place les pièces blanches
         for (int i = 0; i < 16; i++) {
@@ -80,6 +85,9 @@ public class Plateau {
         }
     }
 
+    /**
+     * Initialise la position de toutes les cases de l'échiquier
+     */
     private void initPositions(){
         //créer une liste de toutes les positions possibles sur le plateau; position (0,0) correspond à la 1ère case en bas à gauche
         for (int posY = 0; posY < 8; posY++) {
@@ -146,7 +154,13 @@ public class Plateau {
         }
     }
 
-
+    /**
+     * vérifie si deux positions sont égales
+     *
+     * @param    position1      1ère position
+     * @param    position2      2ème position
+     * @return   true si les positions sont égales, false sinon
+     */
     public boolean comparePositions(Position position1, Position position2){
         if (position1.getX() == position2.getX() && position1.getY()== position2.getY())
             return true;
