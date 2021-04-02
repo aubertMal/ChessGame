@@ -7,7 +7,7 @@ public class Plateau {
     private List<Piece> piecesNoires;
     private List<Piece> piecesBlanches;
     private List<Case> cases;
-    private List<Position> positionsPossibles = new ArrayList<>();
+    private List<Position> positionsEchiqiers = new ArrayList<>();
 
     public List<Piece> getPiecesNoires() {
         return piecesNoires;
@@ -66,17 +66,17 @@ public class Plateau {
     private void initCases() {
         //on place les pièces blanches
         for (int i = 0; i < 16; i++) {
-            cases.add(new Case(piecesBlanches.get(i),positionsPossibles.get(i)));
+            cases.add(new Case(piecesBlanches.get(i), positionsEchiqiers.get(i)));
         }
 
         //on définit les cases vides
         for (int i = 16; i < 48; i++) {
-            cases.add(new Case(null,positionsPossibles.get(i)));
+            cases.add(new Case(null, positionsEchiqiers.get(i)));
         }
 
         //on place les pièces noires
         for (int i = 48; i < 64; i++) {
-            cases.add(new Case(piecesNoires.get(i-48),positionsPossibles.get(i)));
+            cases.add(new Case(piecesNoires.get(i-48), positionsEchiqiers.get(i)));
         }
     }
 
@@ -84,7 +84,7 @@ public class Plateau {
         //créer une liste de toutes les positions possibles sur le plateau; position (0,0) correspond à la 1ère case en bas à gauche
         for (int posY = 0; posY < 8; posY++) {
             for (int posX = 0; posX < 8; posX++) {
-                positionsPossibles.add(new Position(posX,posY));
+                positionsEchiqiers.add(new Position(posX,posY));
             }
         }
     }
@@ -100,16 +100,38 @@ public class Plateau {
 
         for (Case caseEchiquier:cases) {
             if (comparePositions(caseEchiquier.getPositionCase(), positionCliquee)){
-                if (caseEchiquier.getPiece()!=null)
+                if (caseEchiquier.getPiece()!=null) {
                     positionsPossibles = caseEchiquier.getPiece().deplacementsPossibles(positionCliquee);
+                    //on enlève les positions des pièces de même couleur de la liste
+                    updatePositionsPossibles(caseEchiquier.getPiece().getCouleurPiece(),positionsPossibles);
+                }
             }
-
         }
+
         return positionsPossibles;
     }
 
-    public List<Position> getPositionsPossibles() {
-        return positionsPossibles;
+
+    /**
+     * Met à jour la liste des positions possibles en supprimant les positions des cases occupées par une pièce de même couleur
+     *
+     * @param    positionsPossibles      la liste initiale des positions possibles
+     * @param    couleurPiece            la couleur de la pièce à bouger
+     * @return   positionsPossibles      la liste de positions à jour
+     */
+
+    private void updatePositionsPossibles(Couleur couleurPiece, List<Position> positionsPossibles) {
+        for (Position posPossible:positionsPossibles) {
+            for (Case casePossible:cases) {
+                if (comparePositions(posPossible,casePossible.getPositionCase()))
+                    if (casePossible.getPiece()!=null && casePossible.getPiece().getCouleurPiece()==couleurPiece)
+                        positionsPossibles.remove(posPossible);
+            }
+        }
+    }
+
+    public List<Position> getPositionsEchiqiers() {
+        return positionsEchiqiers;
     }
 
     public boolean comparePositions(Position position1, Position position2){

@@ -1,5 +1,6 @@
 package aubert.chessGame.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pion extends Piece{
@@ -9,6 +10,16 @@ public class Pion extends Piece{
 
     @Override
     public List<Position> deplacementsPossibles(Position position){
-        return null;
+        List <Position> positionsPossibles = new ArrayList<>();
+        int posX = position.getX();
+        int posY = position.getY();
+
+        positionsPossibles.add(new Position(posX,posY+1));
+        //TODO: 3 cas particuliers à gérer
+        positionsPossibles.add(new Position(posX+1, posY+1));
+        positionsPossibles.add(new Position(posX-1, posY+1));
+        positionsPossibles.add(new Position(posX, posY+2));
+
+        return positionsPossibles;
     }
 }
