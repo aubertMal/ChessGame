@@ -19,11 +19,11 @@ public class ChessGameController implements Initializable {
     private List<Piece> piecesBlanches = new ArrayList<>();
     private List<Case> casesEchiquier = new ArrayList<>();
     private List<Deplacement> deplacementsEffectues = new ArrayList<>();
-    private Couleur tourAJouer=Couleur.BLANC;
+    private Couleur tourAJouer = Couleur.BLANC;
 
     private Plateau plateau = new Plateau(piecesNoires, piecesBlanches, casesEchiquier);
 
-    private Partie partie = new Partie(plateau, deplacementsEffectues,tourAJouer);
+    private Partie partie = new Partie(plateau, deplacementsEffectues, tourAJouer);
     private HashMap<Pane, Position> mapCasePane = new HashMap<>();
 
     @FXML
@@ -184,132 +184,132 @@ public class ChessGameController implements Initializable {
             debutPartie.setText("Début d'une nouvelle partie");
             placerPiecesBlanches();
             placerPiecesNoires();
+            initGridPane();
             tour.setText("Blancs");
         });
 
-//        pane_0_0.setOnMouseClicked(mouseEvent -> {
-//            Position positionCliquee = new Position(0,0);
-//            List<Position> positionsPossibles = new ArrayList<>();
-//            for (Case caseCliquee: casesEchiquier) {
-//                if (caseCliquee.getPositionCase().equals(positionCliquee)){
-//                    if (caseCliquee.getPiece()!=null){
-//                        positionsPossibles = caseCliquee.getPiece().deplacementsPossibles(positionCliquee);
-//                    }
-//                }
-//            }
-//        });
-
         //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
-        for (Map.Entry<Pane,Position> entry:mapCasePane.entrySet()) {
+        for (Map.Entry<Pane, Position> entry : mapCasePane.entrySet()) {
             Pane paneTemp = entry.getKey();
             paneTemp.setOnMouseClicked(mouseEvent -> {
-                List<Position> positionsPossibles = new ArrayList<>();
-                for (Case caseEchiquier:casesEchiquier) {
-                    if (caseEchiquier.getPositionCase().equals(entry.getValue())){
-                        if (caseEchiquier.getPositionCase()!=null)
-                            positionsPossibles = caseEchiquier.getPiece().deplacementsPossibles(entry.getValue());
-                    }
+                //pour enlever le setStyle défini au précédent clic
+                initGridPane();
 
-                }
                 //pour chaque position possible on va chercher les panes correspondants pour highlight
-                for (Position posPossible:positionsPossibles) {
-                    Pane panePossible = trouverPaneParPosition(posPossible,mapCasePane);
-                    panePossible.setStyle("-fx-background-color: #641010;");
-                }
+                marquerPositionsPossibles(entry.getValue());
             });
         }
     }
 
-    private Pane trouverPaneParPosition(Position position, HashMap<Pane, Position> map){
+    private Pane trouverPaneParPosition(Position position, HashMap<Pane, Position> map) {
         Pane paneToReturn = new Pane();
-        for (Map.Entry<Pane,Position> entry: this.mapCasePane.entrySet()) {
-            if (entry.getValue().equals(position))
-                paneToReturn=entry.getKey();
+        for (Map.Entry<Pane, Position> entry : this.mapCasePane.entrySet()) {
+            if (plateau.comparePositions(position, entry.getValue())) {
+                paneToReturn = entry.getKey();
+                return paneToReturn;
+            }
         }
+        //si la position ne correspond à aucun pane dans la map c'est qu'on dépasse le plateau
         return paneToReturn;
+    }
+
+    private void marquerPositionsPossibles(Position positionDepart){
+        if (plateau.deplacementsPossibles(positionDepart) != null && plateau.deplacementsPossibles(positionDepart).size() != 0) {
+            for (Position posPossible : plateau.deplacementsPossibles(positionDepart)) {
+                Pane panePossible = trouverPaneParPosition(posPossible, mapCasePane);
+                if (panePossible != null)
+                    panePossible.setStyle("-fx-background-color: #4C8295;");
+            }
+        }
+    }
+    
+    private void initGridPane() {
+        for (Map.Entry<Pane, Position> entry : this.mapCasePane.entrySet()) {
+            entry.getKey().setStyle(null);
+        }
     }
 
     private void initMapPositions() {
 
-        mapCasePane.put(pane_0_0,new Position(0,0));
-        mapCasePane.put(pane_1_0,new Position(1,0));
-        mapCasePane.put(pane_2_0,new Position(2,0));
-        mapCasePane.put(pane_3_0,new Position(3,0));
-        mapCasePane.put(pane_4_0,new Position(4,0));
-        mapCasePane.put(pane_5_0,new Position(5,0));
-        mapCasePane.put(pane_6_0,new Position(6,0));
-        mapCasePane.put(pane_7_0,new Position(7,0));
+        mapCasePane.put(pane_0_0, new Position(0, 0));
+        mapCasePane.put(pane_1_0, new Position(1, 0));
+        mapCasePane.put(pane_2_0, new Position(2, 0));
+        mapCasePane.put(pane_3_0, new Position(3, 0));
+        mapCasePane.put(pane_4_0, new Position(4, 0));
+        mapCasePane.put(pane_5_0, new Position(5, 0));
+        mapCasePane.put(pane_6_0, new Position(6, 0));
+        mapCasePane.put(pane_7_0, new Position(7, 0));
 
-        mapCasePane.put(pane_0_1,new Position(0,0));
-        mapCasePane.put(pane_1_1,new Position(1,1));
-        mapCasePane.put(pane_2_1,new Position(2,1));
-        mapCasePane.put(pane_3_1,new Position(3,1));
-        mapCasePane.put(pane_4_1,new Position(4,1));
-        mapCasePane.put(pane_5_1,new Position(5,1));
-        mapCasePane.put(pane_6_1,new Position(6,1));
-        mapCasePane.put(pane_7_1,new Position(7,1));
+        mapCasePane.put(pane_0_1, new Position(0, 0));
+        mapCasePane.put(pane_1_1, new Position(1, 1));
+        mapCasePane.put(pane_2_1, new Position(2, 1));
+        mapCasePane.put(pane_3_1, new Position(3, 1));
+        mapCasePane.put(pane_4_1, new Position(4, 1));
+        mapCasePane.put(pane_5_1, new Position(5, 1));
+        mapCasePane.put(pane_6_1, new Position(6, 1));
+        mapCasePane.put(pane_7_1, new Position(7, 1));
 
-        mapCasePane.put(pane_0_2,new Position(0,2));
-        mapCasePane.put(pane_1_2,new Position(1,2));
-        mapCasePane.put(pane_2_2,new Position(2,2));
-        mapCasePane.put(pane_3_2,new Position(3,2));
-        mapCasePane.put(pane_4_2,new Position(4,2));
-        mapCasePane.put(pane_5_2,new Position(5,2));
-        mapCasePane.put(pane_6_2,new Position(6,2));
-        mapCasePane.put(pane_7_2,new Position(7,2));
+        mapCasePane.put(pane_0_2, new Position(0, 2));
+        mapCasePane.put(pane_1_2, new Position(1, 2));
+        mapCasePane.put(pane_2_2, new Position(2, 2));
+        mapCasePane.put(pane_3_2, new Position(3, 2));
+        mapCasePane.put(pane_4_2, new Position(4, 2));
+        mapCasePane.put(pane_5_2, new Position(5, 2));
+        mapCasePane.put(pane_6_2, new Position(6, 2));
+        mapCasePane.put(pane_7_2, new Position(7, 2));
 
-        mapCasePane.put(pane_0_3,new Position(0,3));
-        mapCasePane.put(pane_1_3,new Position(1,3));
-        mapCasePane.put(pane_2_3,new Position(2,3));
-        mapCasePane.put(pane_3_3,new Position(3,3));
-        mapCasePane.put(pane_4_3,new Position(4,3));
-        mapCasePane.put(pane_5_3,new Position(5,3));
-        mapCasePane.put(pane_6_3,new Position(6,3));
-        mapCasePane.put(pane_7_3,new Position(7,3));
+        mapCasePane.put(pane_0_3, new Position(0, 3));
+        mapCasePane.put(pane_1_3, new Position(1, 3));
+        mapCasePane.put(pane_2_3, new Position(2, 3));
+        mapCasePane.put(pane_3_3, new Position(3, 3));
+        mapCasePane.put(pane_4_3, new Position(4, 3));
+        mapCasePane.put(pane_5_3, new Position(5, 3));
+        mapCasePane.put(pane_6_3, new Position(6, 3));
+        mapCasePane.put(pane_7_3, new Position(7, 3));
 
-        mapCasePane.put(pane_0_4,new Position(0,4));
-        mapCasePane.put(pane_1_4,new Position(1,4));
-        mapCasePane.put(pane_2_4,new Position(2,4));
-        mapCasePane.put(pane_3_4,new Position(3,4));
-        mapCasePane.put(pane_4_4,new Position(4,4));
-        mapCasePane.put(pane_5_4,new Position(5,4));
-        mapCasePane.put(pane_6_4,new Position(6,4));
-        mapCasePane.put(pane_7_4,new Position(7,4));
+        mapCasePane.put(pane_0_4, new Position(0, 4));
+        mapCasePane.put(pane_1_4, new Position(1, 4));
+        mapCasePane.put(pane_2_4, new Position(2, 4));
+        mapCasePane.put(pane_3_4, new Position(3, 4));
+        mapCasePane.put(pane_4_4, new Position(4, 4));
+        mapCasePane.put(pane_5_4, new Position(5, 4));
+        mapCasePane.put(pane_6_4, new Position(6, 4));
+        mapCasePane.put(pane_7_4, new Position(7, 4));
 
-        mapCasePane.put(pane_0_5,new Position(0,5));
-        mapCasePane.put(pane_1_5,new Position(1,5));
-        mapCasePane.put(pane_2_5,new Position(2,5));
-        mapCasePane.put(pane_3_5,new Position(3,5));
-        mapCasePane.put(pane_4_5,new Position(4,5));
-        mapCasePane.put(pane_5_5,new Position(5,5));
-        mapCasePane.put(pane_6_5,new Position(6,5));
-        mapCasePane.put(pane_7_5,new Position(7,5));
+        mapCasePane.put(pane_0_5, new Position(0, 5));
+        mapCasePane.put(pane_1_5, new Position(1, 5));
+        mapCasePane.put(pane_2_5, new Position(2, 5));
+        mapCasePane.put(pane_3_5, new Position(3, 5));
+        mapCasePane.put(pane_4_5, new Position(4, 5));
+        mapCasePane.put(pane_5_5, new Position(5, 5));
+        mapCasePane.put(pane_6_5, new Position(6, 5));
+        mapCasePane.put(pane_7_5, new Position(7, 5));
 
-        mapCasePane.put(pane_0_6,new Position(0,6));
-        mapCasePane.put(pane_1_6,new Position(1,6));
-        mapCasePane.put(pane_2_6,new Position(2,6));
-        mapCasePane.put(pane_3_6,new Position(3,6));
-        mapCasePane.put(pane_4_6,new Position(4,6));
-        mapCasePane.put(pane_5_6,new Position(5,6));
-        mapCasePane.put(pane_6_6,new Position(6,6));
-        mapCasePane.put(pane_7_6,new Position(7,6));
+        mapCasePane.put(pane_0_6, new Position(0, 6));
+        mapCasePane.put(pane_1_6, new Position(1, 6));
+        mapCasePane.put(pane_2_6, new Position(2, 6));
+        mapCasePane.put(pane_3_6, new Position(3, 6));
+        mapCasePane.put(pane_4_6, new Position(4, 6));
+        mapCasePane.put(pane_5_6, new Position(5, 6));
+        mapCasePane.put(pane_6_6, new Position(6, 6));
+        mapCasePane.put(pane_7_6, new Position(7, 6));
 
-        mapCasePane.put(pane_0_7,new Position(0,7));
-        mapCasePane.put(pane_1_7,new Position(1,7));
-        mapCasePane.put(pane_2_7,new Position(2,7));
-        mapCasePane.put(pane_3_7,new Position(3,7));
-        mapCasePane.put(pane_4_7,new Position(4,7));
-        mapCasePane.put(pane_5_7,new Position(5,7));
-        mapCasePane.put(pane_6_7,new Position(6,7));
-        mapCasePane.put(pane_7_7,new Position(7,7));
+        mapCasePane.put(pane_0_7, new Position(0, 7));
+        mapCasePane.put(pane_1_7, new Position(1, 7));
+        mapCasePane.put(pane_2_7, new Position(2, 7));
+        mapCasePane.put(pane_3_7, new Position(3, 7));
+        mapCasePane.put(pane_4_7, new Position(4, 7));
+        mapCasePane.put(pane_5_7, new Position(5, 7));
+        mapCasePane.put(pane_6_7, new Position(6, 7));
+        mapCasePane.put(pane_7_7, new Position(7, 7));
     }
 
-    public void placerPiecesBlanches(){
+    public void placerPiecesBlanches() {
         ImageView imageTourBlanche = new ImageView(new Image(piecesBlanches.get(0).getImage()));
         ImageView imageCavalierBlanc = new ImageView(new Image(piecesBlanches.get(1).getImage()));
         ImageView imageFouBlanc = new ImageView(new Image(piecesBlanches.get(2).getImage()));
-        ImageView imageReineBlanche = new ImageView(new Image(piecesBlanches.get(4).getImage()));
-        ImageView imageRoiBlanc = new ImageView(new Image(piecesBlanches.get(3).getImage()));
+        ImageView imageReineBlanche = new ImageView(new Image(piecesBlanches.get(3).getImage()));
+        ImageView imageRoiBlanc = new ImageView(new Image(piecesBlanches.get(4).getImage()));
         ImageView imageFouBlanc2 = new ImageView(new Image(piecesBlanches.get(5).getImage()));
         ImageView imageCavalierBlanc2 = new ImageView(new Image(piecesBlanches.get(6).getImage()));
         ImageView imageTourBlanche2 = new ImageView(new Image(piecesBlanches.get(7).getImage()));
@@ -343,7 +343,7 @@ public class ChessGameController implements Initializable {
 
     }
 
-    public void placerPiecesNoires(){
+    public void placerPiecesNoires() {
         ImageView imageTourNoire = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(8).getImage()));
         ImageView imageCavalierNoir1 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(9).getImage()));
         ImageView imageFouNoir1 = new ImageView(new Image(partie.getPlateau().getPiecesNoires().get(10).getImage()));

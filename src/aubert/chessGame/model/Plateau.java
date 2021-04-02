@@ -39,8 +39,8 @@ public class Plateau {
         piecesBlanches.add(new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
         piecesBlanches.add(new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
         piecesBlanches.add(new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
-        piecesBlanches.add(new Roi("Roi",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_king.png"));
         piecesBlanches.add(new Dame("Dame",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_queen.png"));
+        piecesBlanches.add(new Roi("Roi",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_king.png"));
         piecesBlanches.add(new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
         piecesBlanches.add(new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
         piecesBlanches.add(new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
@@ -56,8 +56,8 @@ public class Plateau {
         piecesNoires.add(new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
         piecesNoires.add(new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
         piecesNoires.add(new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
-        piecesNoires.add(new Roi("Roi",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_king.png"));
         piecesNoires.add(new Dame("Dame",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_queen.png"));
+        piecesNoires.add(new Roi("Roi",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_king.png"));
         piecesNoires.add(new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
         piecesNoires.add(new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
         piecesNoires.add(new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
@@ -89,11 +89,33 @@ public class Plateau {
         }
     }
 
-    public List<Position> deplacementsPossibles (Case caseActuelle){
-        return null;
+    /**
+     * Retourne une liste de déplacements possibles en fonction de la position de la case sélectionnée et la pièce qui se trouve sur la case.
+     *
+     * @param    positionCliquee      la position de la case cliquée par le joueur
+     * @return   positionsPossibles   une liste de positions possibles pour la pièce si elle existe à partir de la case sélectionnée
+     */
+    public List<Position> deplacementsPossibles (Position positionCliquee){
+        List<Position> positionsPossibles = new ArrayList<>();
+
+        for (Case caseEchiquier:cases) {
+            if (comparePositions(caseEchiquier.getPositionCase(), positionCliquee)){
+                if (caseEchiquier.getPiece()!=null)
+                    positionsPossibles = caseEchiquier.getPiece().deplacementsPossibles(positionCliquee);
+            }
+
+        }
+        return positionsPossibles;
     }
 
     public List<Position> getPositionsPossibles() {
         return positionsPossibles;
+    }
+
+    public boolean comparePositions(Position position1, Position position2){
+        if (position1.getX() == position2.getX() && position1.getY()== position2.getY())
+            return true;
+        else
+            return false;
     }
 }
