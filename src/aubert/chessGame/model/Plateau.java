@@ -113,6 +113,22 @@ public class Plateau {
 
 
     /**
+     * Met à jour la liste des cases du plateau suite au déplacement effectué
+     *
+     * @param    deplacementEnCours   le déplacement demandé
+     */
+    public void deplacerPiece(Deplacement deplacementEnCours){
+        deplacementEnCours.getNewCase().setPiece(deplacementEnCours.getOldCase().getPiece());
+        deplacementEnCours.getOldCase().setPiece(null);
+
+        for (Case caseTemp:cases) {
+            if (comparePositions(caseTemp.getPositionCase(),deplacementEnCours.getNewCase().getPositionCase()))
+                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getNewCase());
+            if (comparePositions(caseTemp.getPositionCase(), deplacementEnCours.getOldCase().getPositionCase()))
+                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getOldCase());
+        }
+    }
+    /**
      * Met à jour la liste des positions possibles en supprimant les positions des cases occupées par une pièce de même couleur
      *
      * @param    positionsPossibles      la liste initiale des positions possibles
@@ -130,9 +146,6 @@ public class Plateau {
         }
     }
 
-    public List<Position> getPositionsEchiqiers() {
-        return positionsEchiqiers;
-    }
 
     public boolean comparePositions(Position position1, Position position2){
         if (position1.getX() == position2.getX() && position1.getY()== position2.getY())

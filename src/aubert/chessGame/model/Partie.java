@@ -28,8 +28,10 @@ public class Partie {
         return turn;
     }
 
-    public void effectuerDeplacement(){
-
+    public void effectuerDeplacement(Case ancienneCase,Case nouvelleCase, Piece pieceADeplacer){
+        Deplacement nouveauDeplacement = new Deplacement(pieceADeplacer,ancienneCase,nouvelleCase);
+        deplacementsRealises.add(nouveauDeplacement);
+        plateau.deplacerPiece(nouveauDeplacement);
     }
 
     public void annulerDeplacement(){

@@ -9,6 +9,14 @@ public class Case {
         this.positionCase = positionCase;
     }
 
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
+    public void setPositionCase(Position positionCase) {
+        this.positionCase = positionCase;
+    }
+
     public Piece getPiece() {
         return piece;
     }
