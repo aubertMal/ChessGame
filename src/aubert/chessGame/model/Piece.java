@@ -1,6 +1,5 @@
 package aubert.chessGame.model;
 
-import java.nio.file.Path;
 import java.util.List;
 
 public class Piece {

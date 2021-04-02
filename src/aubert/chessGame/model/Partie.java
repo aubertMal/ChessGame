@@ -24,6 +24,10 @@ public class Partie {
         return plateau;
     }
 
+    public List<Deplacement> getDeplacementsRealises() {
+        return deplacementsRealises;
+    }
+
     public Couleur getTurn() {
         return turn;
     }

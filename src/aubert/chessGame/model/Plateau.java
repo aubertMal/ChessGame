@@ -115,7 +115,6 @@ public class Plateau {
                 }
             }
         }
-
         return positionsPossibles;
     }
 

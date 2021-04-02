@@ -3,11 +3,13 @@ package aubert.chessGame.controller;
 import aubert.chessGame.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.*;
@@ -28,6 +30,10 @@ public class ChessGameController implements Initializable {
 
     @FXML
     private Button boutonNouvellePartie;
+    @FXML
+    private Button boutonQuitter;
+    @FXML
+    private Button boutonAnnuler;
 
     @FXML
     private Pane pane_0_0;
@@ -173,12 +179,15 @@ public class ChessGameController implements Initializable {
 
     private Case casePrecedente;
 
+    private Deplacement deplacementPrecedent;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         boutonNouvellePartie.setOnMouseClicked(mouseEvent -> {
             partie.creerNouvellePartie();
             initMapPositions();
+            clearPanes();
             initGridPane();
             initPaneListeners();
             placerPiecesBlanches();
@@ -187,8 +196,17 @@ public class ChessGameController implements Initializable {
             tour.setText("Blancs");
         });
 
-    }
+        boutonQuitter.setOnMouseClicked(mouseEvent -> {
+            Stage stage = (Stage) boutonQuitter.getScene().getWindow();
+            stage.close();
+        });
 
+        boutonAnnuler.setOnMouseClicked(mouseEvent -> {
+            if (partie.getDeplacementsRealises().size()!=0){
+                partie.annulerDeplacement(deplacementPrecedent);
+            }
+        });
+    }
 
     private void initPaneListeners() {
         //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
@@ -207,6 +225,8 @@ public class ChessGameController implements Initializable {
                         updateImagePane(trouverPaneParCase(casePrecedente.getPositionCase(), mapCasePane), casePrecedente);
                         //On passe au 2ème joueur
                         tour.setText(partie.getTurn() == Couleur.BLANC ? "Blancs" : "Noirs");
+                        //Sauvegarder le dernier déplacement
+                        deplacementPrecedent = new Deplacement(entry.getValue().getPiece(), casePrecedente, entry.getValue());
                     } else
                         infoPartie.setText("Ce n'est pas à votre tour de jouer");
                 }
@@ -372,6 +392,11 @@ public class ChessGameController implements Initializable {
 
     }
 
+    private void clearPanes(){
+        for (Map.Entry<Pane, Case> entry : this.mapCasePane.entrySet()) {
+            entry.getKey().getChildren().clear();
+        }
+    }
     private void initGridPane() {//TODO: pas possible avec le keySet car les Pane ne seront pas dans l'ordre --> trouver mieux
 
 //        Pane[] panes = mapCasePane.keySet().toArray(new Pane[0]);

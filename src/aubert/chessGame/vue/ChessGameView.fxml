@@ -29,9 +29,9 @@
                         <Font name="Arial" size="13.0" />
                     </font>
                 </Text>
-                <Button layoutX="67.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Annuler" />
+                <Button fx:id="boutonAnnuler" layoutX="67.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Annuler" />
                 <Button fx:id="boutonNouvellePartie" layoutX="67.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Nouvelle Partie" />
-                <Button layoutX="67.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Quitter" />
+                <Button fx:id="boutonQuitter" layoutX="67.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Quitter" />
             <Text fx:id="infoPartie" layoutX="75.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0000208467245">
                <font>
                   <Font name="Arial" size="16.0" />
