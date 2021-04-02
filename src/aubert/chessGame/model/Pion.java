@@ -14,12 +14,15 @@ public class Pion extends Piece{
         int posX = position.getX();
         int posY = position.getY();
 
-        positionsPossibles.add(new Position(posX,posY+1));
-        //TODO: 3 cas particuliers à gérer
-        positionsPossibles.add(new Position(posX+1, posY+1));
-        positionsPossibles.add(new Position(posX-1, posY+1));
-        positionsPossibles.add(new Position(posX, posY+2));
-
+        if (getCouleurPiece()==Couleur.BLANC) {
+            positionsPossibles.add(new Position(posX, posY + 1));
+            //TODO: 3 cas particuliers à gérer
+            positionsPossibles.add(new Position(posX + 1, posY + 1));
+            positionsPossibles.add(new Position(posX - 1, posY + 1));
+            positionsPossibles.add(new Position(posX, posY + 2));
+        } else{
+            positionsPossibles.add(new Position(posX,posY-1));
+        }
         return positionsPossibles;
     }
 }

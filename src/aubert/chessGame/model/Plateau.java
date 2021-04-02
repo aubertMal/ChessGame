@@ -144,13 +144,15 @@ public class Plateau {
      */
 
     private void updatePositionsPossibles(Couleur couleurPiece, List<Position> positionsPossibles) {
+        List<Position> positionsToRemove = new ArrayList<>();
         for (Position posPossible:positionsPossibles) {
             for (Case casePossible:cases) {
                 if (comparePositions(posPossible,casePossible.getPositionCase()))
                     if (casePossible.getPiece()!=null && casePossible.getPiece().getCouleurPiece()==couleurPiece)
-                        positionsPossibles.remove(posPossible);
+                        positionsToRemove.add(posPossible);
             }
         }
+        positionsPossibles.removeAll(positionsToRemove);
     }
 
     /**

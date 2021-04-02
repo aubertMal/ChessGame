@@ -204,6 +204,9 @@ public class ChessGameController implements Initializable {
         boutonAnnuler.setOnMouseClicked(mouseEvent -> {
             if (partie.getDeplacementsRealises().size()!=0){
                 partie.annulerDeplacement(deplacementPrecedent);
+                updateImagePane(trouverPaneParCase(deplacementPrecedent.getOldCase().getPositionCase(),mapCasePane), deplacementPrecedent.getNewCase());
+                //TODO récupérer la pièce mangée du déplacement
+                trouverPaneParCase(deplacementPrecedent.getNewCase().getPositionCase(),mapCasePane).getChildren().clear();
             }
         });
     }
@@ -212,6 +215,7 @@ public class ChessGameController implements Initializable {
         //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
         for (Map.Entry<Pane, Case> entry : mapCasePane.entrySet()) {
             entry.getKey().setOnMouseClicked(mouseEvent -> {
+                System.out.println("case cliquee" + entry.getKey().getId());
                 infoPartie.setText(" ");
                 //si la case est en highlight alors on peut y effectuer un déplacement
                 if (entry.getKey().getStyle().contains("#4C8295")){
