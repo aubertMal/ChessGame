@@ -25,7 +25,7 @@ public class ChessGameController implements Initializable {
     private Plateau plateau = new Plateau(piecesNoires, piecesBlanches, casesEchiquier);
 
     private Partie partie = new Partie(plateau, deplacementsEffectues, tourAJouer);
-    private HashMap<Pane, Case> mapCasePane = new HashMap<>();
+    private LinkedHashMap<Pane, Case> mapCasePane = new LinkedHashMap<>();//utiliser LinkedHadhMap parce que ça conserve l'ordre d'insertion
 
 
     @FXML
@@ -181,17 +181,15 @@ public class ChessGameController implements Initializable {
 
     private Deplacement deplacementPrecedent;
 
+    private List<Pane> panes = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        demarrerApplication();
 
         boutonNouvellePartie.setOnMouseClicked(mouseEvent -> {
-            partie.creerNouvellePartie();
-            initMapPositions();
-            clearPanes();
-            initGridPane();
+            demarrerNouvellePartie();
             initPaneListeners();
-            placerPiecesBlanches();
-            placerPiecesNoires();
             infoPartie.setText("Début d'une nouvelle partie");
             tour.setText("Blancs");
         });
@@ -211,7 +209,104 @@ public class ChessGameController implements Initializable {
         });
     }
 
+    private void demarrerApplication() {
+        //on prépare les panes pour l'affichage
+        initListePanes();
+        initGridPane();
+    }
+
+    private void demarrerNouvellePartie(){
+        //on prépare le platean, les positions, les cases, les listes blanches et noires
+        partie.creerNouvellePartie();
+        //on établit les liens entre les cases et les panes
+        initMapPositions();
+        //on transmet les cases sur les panes
+        refreshPanes();
+    }
+
+    private void initListePanes(){
+        panes.add(0,pane_0_0);
+        panes.add(1,pane_1_0);
+        panes.add(2,pane_2_0);
+        panes.add(3,pane_3_0);
+        panes.add(4,pane_4_0);
+        panes.add(5,pane_5_0);
+        panes.add(6,pane_6_0);
+        panes.add(7,pane_7_0);
+
+        panes.add(8,pane_0_1);
+        panes.add(9,pane_1_1);
+        panes.add(10,pane_2_1);
+        panes.add(11,pane_3_1);
+        panes.add(12,pane_4_1);
+        panes.add(13,pane_5_1);
+        panes.add(14,pane_6_1);
+        panes.add(15,pane_7_1);
+
+        panes.add(16,pane_0_2);
+        panes.add(17,pane_1_2);
+        panes.add(18,pane_2_2);
+        panes.add(19,pane_3_2);
+        panes.add(20,pane_4_2);
+        panes.add(21,pane_5_2);
+        panes.add(22,pane_6_2);
+        panes.add(23,pane_7_2);
+
+        panes.add(24,pane_0_3);
+        panes.add(25,pane_1_3);
+        panes.add(26,pane_2_3);
+        panes.add(27,pane_3_3);
+        panes.add(28,pane_4_3);
+        panes.add(29,pane_5_3);
+        panes.add(30,pane_6_3);
+        panes.add(31,pane_7_3);
+
+        panes.add(32,pane_0_4);
+        panes.add(33,pane_1_4);
+        panes.add(34,pane_2_4);
+        panes.add(35,pane_3_4);
+        panes.add(36,pane_4_4);
+        panes.add(37,pane_5_4);
+        panes.add(38,pane_6_4);
+        panes.add(39,pane_7_4);
+
+        panes.add(40,pane_0_5);
+        panes.add(41,pane_1_5);
+        panes.add(42,pane_2_5);
+        panes.add(43,pane_3_5);
+        panes.add(44,pane_4_5);
+        panes.add(45,pane_5_5);
+        panes.add(46,pane_6_5);
+        panes.add(47,pane_7_5);
+
+        panes.add(48,pane_0_6);
+        panes.add(49,pane_1_6);
+        panes.add(50,pane_2_6);
+        panes.add(51,pane_3_6);
+        panes.add(52,pane_4_6);
+        panes.add(53,pane_5_6);
+        panes.add(54,pane_6_6);
+        panes.add(55,pane_7_6);
+
+        panes.add(56,pane_0_7);
+        panes.add(57,pane_1_7);
+        panes.add(58,pane_2_7);
+        panes.add(59,pane_3_7);
+        panes.add(60,pane_4_7);
+        panes.add(61,pane_5_7);
+        panes.add(62,pane_6_7);
+        panes.add(63,pane_7_7);
+    }
+
     private void initPaneListeners() {
+//        for (Pane paneEcoute:panes) {
+//            paneEcoute.setOnMouseClicked(mouseEvent -> {
+//                //quand on clique sur une case c'est où pour voir les déplacements possibles d'une pièce ou pour déplacer une pièce
+//                infoPartie.setText(" ");
+//                if (paneEcoute.getStyle().contains("#4C8295"))
+//
+//            });
+//        }
         //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
         for (Map.Entry<Pane, Case> entry : mapCasePane.entrySet()) {
             entry.getKey().setOnMouseClicked(mouseEvent -> {
@@ -271,79 +366,10 @@ public class ChessGameController implements Initializable {
         }
     }
 
-    private void initMapPositions() {//TODO: mieux avec un tableau de panes et une boucle for
-
-        mapCasePane.put(pane_0_0, plateau.getCases().get(0));
-        mapCasePane.put(pane_1_0, plateau.getCases().get(1));
-        mapCasePane.put(pane_2_0, plateau.getCases().get(2));
-        mapCasePane.put(pane_3_0, plateau.getCases().get(3));
-        mapCasePane.put(pane_4_0, plateau.getCases().get(4));
-        mapCasePane.put(pane_5_0, plateau.getCases().get(5));
-        mapCasePane.put(pane_6_0, plateau.getCases().get(6));
-        mapCasePane.put(pane_7_0, plateau.getCases().get(7));
-
-        mapCasePane.put(pane_0_1, plateau.getCases().get(8));
-        mapCasePane.put(pane_1_1, plateau.getCases().get(9));
-        mapCasePane.put(pane_2_1, plateau.getCases().get(10));
-        mapCasePane.put(pane_3_1, plateau.getCases().get(11));
-        mapCasePane.put(pane_4_1, plateau.getCases().get(12));
-        mapCasePane.put(pane_5_1, plateau.getCases().get(13));
-        mapCasePane.put(pane_6_1, plateau.getCases().get(14));
-        mapCasePane.put(pane_7_1, plateau.getCases().get(15));
-
-        mapCasePane.put(pane_0_2, plateau.getCases().get(16));
-        mapCasePane.put(pane_1_2, plateau.getCases().get(17));
-        mapCasePane.put(pane_2_2, plateau.getCases().get(18));
-        mapCasePane.put(pane_3_2, plateau.getCases().get(19));
-        mapCasePane.put(pane_4_2, plateau.getCases().get(20));
-        mapCasePane.put(pane_5_2, plateau.getCases().get(21));
-        mapCasePane.put(pane_6_2, plateau.getCases().get(22));
-        mapCasePane.put(pane_7_2, plateau.getCases().get(23));
-
-        mapCasePane.put(pane_0_3, plateau.getCases().get(24));
-        mapCasePane.put(pane_1_3, plateau.getCases().get(25));
-        mapCasePane.put(pane_2_3, plateau.getCases().get(26));
-        mapCasePane.put(pane_3_3, plateau.getCases().get(27));
-        mapCasePane.put(pane_4_3, plateau.getCases().get(28));
-        mapCasePane.put(pane_5_3, plateau.getCases().get(29));
-        mapCasePane.put(pane_6_3, plateau.getCases().get(30));
-        mapCasePane.put(pane_7_3, plateau.getCases().get(31));
-
-        mapCasePane.put(pane_0_4, plateau.getCases().get(32));
-        mapCasePane.put(pane_1_4, plateau.getCases().get(33));
-        mapCasePane.put(pane_2_4, plateau.getCases().get(34));
-        mapCasePane.put(pane_3_4, plateau.getCases().get(35));
-        mapCasePane.put(pane_4_4, plateau.getCases().get(36));
-        mapCasePane.put(pane_5_4, plateau.getCases().get(37));
-        mapCasePane.put(pane_6_4, plateau.getCases().get(38));
-        mapCasePane.put(pane_7_4, plateau.getCases().get(39));
-
-        mapCasePane.put(pane_0_5, plateau.getCases().get(40));
-        mapCasePane.put(pane_1_5, plateau.getCases().get(41));
-        mapCasePane.put(pane_2_5, plateau.getCases().get(42));
-        mapCasePane.put(pane_3_5, plateau.getCases().get(43));
-        mapCasePane.put(pane_4_5, plateau.getCases().get(44));
-        mapCasePane.put(pane_5_5, plateau.getCases().get(45));
-        mapCasePane.put(pane_6_5, plateau.getCases().get(46));
-        mapCasePane.put(pane_7_5, plateau.getCases().get(47));
-
-        mapCasePane.put(pane_0_6, plateau.getCases().get(48));
-        mapCasePane.put(pane_1_6, plateau.getCases().get(49));
-        mapCasePane.put(pane_2_6, plateau.getCases().get(50));
-        mapCasePane.put(pane_3_6, plateau.getCases().get(51));
-        mapCasePane.put(pane_4_6, plateau.getCases().get(52));
-        mapCasePane.put(pane_5_6, plateau.getCases().get(53));
-        mapCasePane.put(pane_6_6, plateau.getCases().get(54));
-        mapCasePane.put(pane_7_6, plateau.getCases().get(55));
-
-        mapCasePane.put(pane_0_7, plateau.getCases().get(56));
-        mapCasePane.put(pane_1_7, plateau.getCases().get(57));
-        mapCasePane.put(pane_2_7, plateau.getCases().get(58));
-        mapCasePane.put(pane_3_7, plateau.getCases().get(59));
-        mapCasePane.put(pane_4_7, plateau.getCases().get(60));
-        mapCasePane.put(pane_5_7, plateau.getCases().get(61));
-        mapCasePane.put(pane_6_7, plateau.getCases().get(62));
-        mapCasePane.put(pane_7_7, plateau.getCases().get(63));
+    private void initMapPositions() {
+        for (int i = 0; i < 64; i++) {
+            mapCasePane.put(panes.get(i), plateau.getCases().get(i));
+        }
     }
 
     public void updateImagePane(Pane paneAMettreAJour, Case nouvelleCase){
@@ -352,135 +378,67 @@ public class ChessGameController implements Initializable {
         else
             paneAMettreAJour.getChildren().clear();
     }
-    public void placerPiecesBlanches() {//TODO: remplacer les positions en dur par un enum
 
-        pane_0_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(0).getImage())));
-        pane_1_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(1).getImage())));
-        pane_2_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(2).getImage())));
-        pane_3_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(3).getImage())));
-        pane_4_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(4).getImage())));
-        pane_5_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(5).getImage())));
-        pane_6_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(6).getImage())));
-        pane_7_0.getChildren().add(new ImageView(new Image(piecesBlanches.get(7).getImage())));
-
-        pane_0_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(8).getImage())));
-        pane_1_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(9).getImage())));
-        pane_2_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(10).getImage())));
-        pane_3_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(11).getImage())));
-        pane_4_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(12).getImage())));
-        pane_5_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(13).getImage())));
-        pane_6_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(14).getImage())));
-        pane_7_1.getChildren().add(new ImageView(new Image(piecesBlanches.get(15).getImage())));
-
-    }
-
-    public void placerPiecesNoires() {
-
-        pane_0_7.getChildren().add(new ImageView(new Image(piecesNoires.get(8).getImage())));
-        pane_1_7.getChildren().add(new ImageView(new Image(piecesNoires.get(9).getImage())));
-        pane_2_7.getChildren().add(new ImageView(new Image(piecesNoires.get(10).getImage())));
-        pane_3_7.getChildren().add(new ImageView(new Image(piecesNoires.get(11).getImage())));
-        pane_4_7.getChildren().add(new ImageView(new Image(piecesNoires.get(12).getImage())));
-        pane_5_7.getChildren().add(new ImageView(new Image(piecesNoires.get(13).getImage())));
-        pane_6_7.getChildren().add(new ImageView(new Image(piecesNoires.get(14).getImage())));
-        pane_7_7.getChildren().add(new ImageView(new Image(piecesNoires.get(15).getImage())));
-
-        pane_0_6.getChildren().add(new ImageView(new Image(piecesNoires.get(0).getImage())));
-        pane_1_6.getChildren().add(new ImageView(new Image(piecesNoires.get(1).getImage())));
-        pane_2_6.getChildren().add(new ImageView(new Image(piecesNoires.get(2).getImage())));
-        pane_3_6.getChildren().add(new ImageView(new Image(piecesNoires.get(3).getImage())));
-        pane_4_6.getChildren().add(new ImageView(new Image(piecesNoires.get(4).getImage())));
-        pane_5_6.getChildren().add(new ImageView(new Image(piecesNoires.get(5).getImage())));
-        pane_6_6.getChildren().add(new ImageView(new Image(piecesNoires.get(6).getImage())));
-        pane_7_6.getChildren().add(new ImageView(new Image(piecesNoires.get(7).getImage())));
-
-    }
-
-    private void clearPanes(){
-        for (Map.Entry<Pane, Case> entry : this.mapCasePane.entrySet()) {
-            entry.getKey().getChildren().clear();
+    //méthode pour transmettre les cases sur les panes
+    //pour chaque case, si on a une pièce on va l'afficher dans le pane sinon on fait un clear
+    private void refreshPanes(){
+        for (Map.Entry <Pane,Case> entry:mapCasePane.entrySet()) {
+            if (entry.getValue().getPiece()!=null)
+                entry.getKey().getChildren().add(new ImageView(new Image(entry.getValue().getPiece().getImage())));
+            else
+                entry.getKey().getChildren().clear();
         }
     }
-    private void initGridPane() {//TODO: pas possible avec le keySet car les Pane ne seront pas dans l'ordre --> trouver mieux
 
-//        Pane[] panes = mapCasePane.keySet().toArray(new Pane[0]);
-//        for (int i = 0; i < panes.length; i++) {
-//            if (i%2==0)
-//                panes[i].setStyle("-fx-background-color: #DDDDDD;");
-//            else
-//                panes[i].setStyle("-fx-background-color: #FFFFFF;");
-//        }
 
-        pane_0_0.setStyle("-fx-background-color: #DDDDDD;");
-        pane_1_0.setStyle("-fx-background-color: #FFFFFF;");
-        pane_2_0.setStyle("-fx-background-color: #DDDDDD;");
-        pane_3_0.setStyle("-fx-background-color: #FFFFFF;");
-        pane_4_0.setStyle("-fx-background-color: #DDDDDD;");
-        pane_5_0.setStyle("-fx-background-color: #FFFFFF;");
-        pane_6_0.setStyle("-fx-background-color: #DDDDDD;");
-        pane_7_0.setStyle("-fx-background-color: #FFFFFF;");
-
-        pane_0_1.setStyle("-fx-background-color: #FFFFFF;");
-        pane_1_1.setStyle("-fx-background-color: #DDDDDD;");
-        pane_2_1.setStyle("-fx-background-color: #FFFFFF;");
-        pane_3_1.setStyle("-fx-background-color: #DDDDDD;");
-        pane_4_1.setStyle("-fx-background-color: #FFFFFF;");
-        pane_5_1.setStyle("-fx-background-color: #DDDDDD;");
-        pane_6_1.setStyle("-fx-background-color: #FFFFFF;");
-        pane_7_1.setStyle("-fx-background-color: #DDDDDD;");
-
-        pane_0_2.setStyle("-fx-background-color: #DDDDDD;");
-        pane_1_2.setStyle("-fx-background-color: #FFFFFF;");
-        pane_2_2.setStyle("-fx-background-color: #DDDDDD;");
-        pane_3_2.setStyle("-fx-background-color: #FFFFFF;");
-        pane_4_2.setStyle("-fx-background-color: #DDDDDD;");
-        pane_5_2.setStyle("-fx-background-color: #FFFFFF;");
-        pane_6_2.setStyle("-fx-background-color: #DDDDDD;");
-        pane_7_2.setStyle("-fx-background-color: #FFFFFF;");
-
-        pane_0_3.setStyle("-fx-background-color: #FFFFFF;");
-        pane_1_3.setStyle("-fx-background-color: #DDDDDD;");
-        pane_2_3.setStyle("-fx-background-color: #FFFFFF;");
-        pane_3_3.setStyle("-fx-background-color: #DDDDDD;");
-        pane_4_3.setStyle("-fx-background-color: #FFFFFF;");
-        pane_5_3.setStyle("-fx-background-color: #DDDDDD;");
-        pane_6_3.setStyle("-fx-background-color: #FFFFFF;");
-        pane_7_3.setStyle("-fx-background-color: #DDDDDD;");
-
-        pane_0_4.setStyle("-fx-background-color: #DDDDDD;");
-        pane_1_4.setStyle("-fx-background-color: #FFFFFF;");
-        pane_2_4.setStyle("-fx-background-color: #DDDDDD;");
-        pane_3_4.setStyle("-fx-background-color: #FFFFFF;");
-        pane_4_4.setStyle("-fx-background-color: #DDDDDD;");
-        pane_5_4.setStyle("-fx-background-color: #FFFFFF;");
-        pane_6_4.setStyle("-fx-background-color: #DDDDDD;");
-        pane_7_4.setStyle("-fx-background-color: #FFFFFF;");
-
-        pane_0_5.setStyle("-fx-background-color: #FFFFFF;");
-        pane_1_5.setStyle("-fx-background-color: #DDDDDD;");
-        pane_2_5.setStyle("-fx-background-color: #FFFFFF;");
-        pane_3_5.setStyle("-fx-background-color: #DDDDDD;");
-        pane_4_5.setStyle("-fx-background-color: #FFFFFF;");
-        pane_5_5.setStyle("-fx-background-color: #DDDDDD;");
-        pane_6_5.setStyle("-fx-background-color: #FFFFFF;");
-        pane_7_5.setStyle("-fx-background-color: #DDDDDD;");
-
-        pane_0_6.setStyle("-fx-background-color: #DDDDDD;");
-        pane_1_6.setStyle("-fx-background-color: #FFFFFF;");
-        pane_2_6.setStyle("-fx-background-color: #DDDDDD;");
-        pane_3_6.setStyle("-fx-background-color: #FFFFFF;");
-        pane_4_6.setStyle("-fx-background-color: #DDDDDD;");
-        pane_5_6.setStyle("-fx-background-color: #FFFFFF;");
-        pane_6_6.setStyle("-fx-background-color: #DDDDDD;");
-        pane_7_6.setStyle("-fx-background-color: #FFFFFF;");
-
-        pane_0_7.setStyle("-fx-background-color: #FFFFFF;");
-        pane_1_7.setStyle("-fx-background-color: #DDDDDD;");
-        pane_2_7.setStyle("-fx-background-color: #FFFFFF;");
-        pane_3_7.setStyle("-fx-background-color: #DDDDDD;");
-        pane_4_7.setStyle("-fx-background-color: #FFFFFF;");
-        pane_5_7.setStyle("-fx-background-color: #DDDDDD;");
-        pane_6_7.setStyle("-fx-background-color: #FFFFFF;");
-        pane_7_7.setStyle("-fx-background-color: #DDDDDD;");
+    private void initGridPane() {//TODO: à revoir
+        for (int i = 0; i < 8; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+        }
+        for (int i = 8; i < 16; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+        }
+        for (int i = 16; i < 24; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+        }
+        for (int i = 24; i < 32; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+        }
+        for (int i = 32; i < 40; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+        }
+        for (int i = 40; i < 48; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+        }
+        for (int i = 48; i < 56; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+        }
+        for (int i = 56; i < 64; i++) {
+            if (i%2==0)
+                panes.get(i).setStyle("-fx-background-color: #FFFFFF;");
+            else
+                panes.get(i).setStyle("-fx-background-color: #DDDDDD;");
+        }
     }
 }

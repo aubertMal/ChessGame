@@ -16,7 +16,6 @@ public class Partie {
     public void creerNouvellePartie(){
 
         plateau.initPlateau();
-        System.out.println("Début Nouvelle Partie");
 
     }
 

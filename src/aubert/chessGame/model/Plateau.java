@@ -35,34 +35,47 @@ public class Plateau {
      * Définit la liste des pièces blanches
      */
     private void initPiecesBlanches() {
-        piecesBlanches.add(new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
-        piecesBlanches.add(new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
-        piecesBlanches.add(new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
-        piecesBlanches.add(new Dame("Dame",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_queen.png"));
-        piecesBlanches.add(new Roi("Roi",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_king.png"));
-        piecesBlanches.add(new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
-        piecesBlanches.add(new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
-        piecesBlanches.add(new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
-        for (int i = 0; i < 8; i++) {
-            piecesBlanches.add(new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
-        }
+        piecesBlanches.add(IndexPieceBlanche.TOUR.getIndexPieceBlanche(),new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
+        piecesBlanches.add(IndexPieceBlanche.CAVALIER1.getIndexPieceBlanche(), new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
+        piecesBlanches.add(IndexPieceBlanche.FOU1.getIndexPieceBlanche(), new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
+        piecesBlanches.add(IndexPieceBlanche.DAME.getIndexPieceBlanche(), new Dame("Dame",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_queen.png"));
+        piecesBlanches.add(IndexPieceBlanche.ROI.getIndexPieceBlanche(), new Roi("Roi",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_king.png"));
+        piecesBlanches.add(IndexPieceBlanche.FOU2.getIndexPieceBlanche(), new Fou("Fou",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_bishop.png"));
+        piecesBlanches.add(IndexPieceBlanche.CAVALIER2.getIndexPieceBlanche(), new Cavalier("Cavalier",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_knight.png"));
+        piecesBlanches.add(IndexPieceBlanche.TOUR2.getIndexPieceBlanche(), new Tour("Tour",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_rook.png"));
+
+        piecesBlanches.add(IndexPieceBlanche.PION1.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION2.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION3.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION4.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION5.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION6.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION7.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
+        piecesBlanches.add(IndexPieceBlanche.PION8.getIndexPieceBlanche(), new Pion("Pion",Couleur.BLANC,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/white_pawn.png"));
     }
 
     /**
      * Définit la liste des pièces noires
      */
     private void initPiecesNoires() {
-        for (int i = 0; i < 8; i++) {
-            piecesNoires.add(new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
-        }
-        piecesNoires.add(new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
-        piecesNoires.add(new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
-        piecesNoires.add(new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
-        piecesNoires.add(new Dame("Dame",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_queen.png"));
-        piecesNoires.add(new Roi("Roi",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_king.png"));
-        piecesNoires.add(new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
-        piecesNoires.add(new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
-        piecesNoires.add(new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
+
+        piecesNoires.add(IndexPieceNoire.PION1.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION2.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION3.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION4.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION5.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION6.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION7.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+        piecesNoires.add(IndexPieceNoire.PION8.getIndexPieceNoire(),new Pion("Pion",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_pawn.png"));
+
+        piecesNoires.add(IndexPieceNoire.TOUR.getIndexPieceNoire(), new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
+        piecesNoires.add(IndexPieceNoire.CAVALIER1.getIndexPieceNoire(), new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
+        piecesNoires.add(IndexPieceNoire.FOU1.getIndexPieceNoire(), new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
+        piecesNoires.add(IndexPieceNoire.DAME.getIndexPieceNoire(), new Dame("Dame",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_queen.png"));
+        piecesNoires.add(IndexPieceNoire.ROI.getIndexPieceNoire(), new Roi("Roi",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_king.png"));
+        piecesNoires.add(IndexPieceNoire.FOU2.getIndexPieceNoire(), new Fou("Fou",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_bishop.png"));
+        piecesNoires.add(IndexPieceNoire.CAVALIER2.getIndexPieceNoire(), new Cavalier("Cavalier",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_knight.png"));
+        piecesNoires.add(IndexPieceNoire.TOUR2.getIndexPieceNoire(), new Tour("Tour",Couleur.NOIR,"File:C:/Workspace/ChessGame/src/aubert/chessGame/img/black_rook.png"));
     }
 
     /**
@@ -71,17 +84,17 @@ public class Plateau {
     private void initCases() {
         //on place les pièces blanches
         for (int i = 0; i < 16; i++) {
-            cases.add(new Case(piecesBlanches.get(i), positionsEchiqiers.get(i)));
+            cases.add(i,new Case(piecesBlanches.get(i), positionsEchiqiers.get(i)));
         }
 
         //on définit les cases vides
         for (int i = 16; i < 48; i++) {
-            cases.add(new Case(null, positionsEchiqiers.get(i)));
+            cases.add(i,new Case(null, positionsEchiqiers.get(i)));
         }
 
         //on place les pièces noires
         for (int i = 48; i < 64; i++) {
-            cases.add(new Case(piecesNoires.get(i-48), positionsEchiqiers.get(i)));
+            cases.add(i,new Case(piecesNoires.get(i-48), positionsEchiqiers.get(i)));
         }
     }
 
