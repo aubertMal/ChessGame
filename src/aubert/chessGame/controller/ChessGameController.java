@@ -202,9 +202,8 @@ public class ChessGameController implements Initializable {
         boutonAnnuler.setOnMouseClicked(mouseEvent -> {
             if (partie.getDeplacementsRealises().size()!=0){
                 partie.annulerDeplacement(deplacementPrecedent);
-                updateImagePane(trouverPaneParCase(deplacementPrecedent.getOldCase().getPositionCase(),mapCasePane), deplacementPrecedent.getNewCase());
+                refreshPanes();
                 //TODO récupérer la pièce mangée du déplacement
-                trouverPaneParCase(deplacementPrecedent.getNewCase().getPositionCase(),mapCasePane).getChildren().clear();
             }
         });
     }
@@ -299,48 +298,39 @@ public class ChessGameController implements Initializable {
     }
 
     private void initPaneListeners() {
-//        for (Pane paneEcoute:panes) {
-//            paneEcoute.setOnMouseClicked(mouseEvent -> {
-//                //quand on clique sur une case c'est où pour voir les déplacements possibles d'une pièce ou pour déplacer une pièce
-//                infoPartie.setText(" ");
-//                if (paneEcoute.getStyle().contains("#4C8295"))
-//
-//            });
-//        }
-        //à chaque fois qu'on clique sur une case on va chercher la case correspondante dans les cases enregistrées, s'il y a une pièce dessus on va récupérer ses déplacements possibles
-        for (Map.Entry<Pane, Case> entry : mapCasePane.entrySet()) {
-            entry.getKey().setOnMouseClicked(mouseEvent -> {
-                System.out.println("case cliquee" + entry.getKey().getId());
+        for (Pane paneEcoute:panes) {
+            paneEcoute.setOnMouseClicked(mouseEvent -> {
+                //quand on clique sur une case c'est où pour voir les déplacements possibles d'une pièce ou pour déplacer une pièce
                 infoPartie.setText(" ");
-                //si la case est en highlight alors on peut y effectuer un déplacement
-                if (entry.getKey().getStyle().contains("#4C8295")){
-                    //on enlève le marquage
-                    initGridPane();
-                    //On fait le déplacement
-                    if (partie.effectuerDeplacement(casePrecedente, entry.getValue(), casePrecedente.getPiece())) {
-                        //on met à jour le nouveauPane
-                        updateImagePane(entry.getKey(), entry.getValue());
-                        //On met à jour l'ancienPane
-                        updateImagePane(trouverPaneParCase(casePrecedente.getPositionCase(), mapCasePane), casePrecedente);
-                        //On passe au 2ème joueur
-                        tour.setText(partie.getTurn() == Couleur.BLANC ? "Blancs" : "Noirs");
-                        //Sauvegarder le dernier déplacement
-                        deplacementPrecedent = new Deplacement(entry.getValue().getPiece(), casePrecedente, entry.getValue());
-                    } else
-                        infoPartie.setText("Ce n'est pas à votre tour de jouer");
+                if (paneEcoute.getStyle().contains("#4C8295")){
+                    initGridPane();//on enlève le marquage
+                    //on effectue le déplacement
+                    effectuerUnDeplacement(paneEcoute);
                 }
-                // sinon on vérifie s'il y a une pièce alors on va voir ses déplacements possibles sinon la case est vide et on ne fait rien
-                else if (entry.getValue().getPiece()!=null){
-                    //pour enlever le setStyle défini au précédent clic
-                    initGridPane();
-
-                    //pour chaque position possible on va chercher les panes correspondants pour highlight
-                    marquerPositionsPossibles(entry.getValue().getPositionCase());
-
+                else if (mapCasePane.get(paneEcoute).getPiece()!=null){//s'il y a une pièce on va voir ses déplacements possibles sinon on ne fait rien
+                    if (!mapCasePane.get(paneEcoute).getPiece().getCouleurPiece().equals(partie.getTurn())){//si ce n'est pas à votre tour de jouer on ne fait rien
+                        infoPartie.setText("CE N'EST PAS A VOTRE TOUR DE JOUER!");
+                    } else{
+                        initGridPane();//on enlève le marquage
+                        marquerPositionsPossibles(mapCasePane.get(paneEcoute));
+                    }
                 }
-                casePrecedente=entry.getValue();
+                casePrecedente=mapCasePane.get(paneEcoute);
             });
         }
+    }
+
+    private void effectuerUnDeplacement(Pane paneEcoute) {
+        partie.effectuerDeplacement(casePrecedente, mapCasePane.get(paneEcoute), casePrecedente.getPiece());
+
+        //on met à jour les panes
+        refreshPanes();
+
+        //On passe au 2ème joueur
+        tour.setText(partie.getTurn() == Couleur.BLANC ? "Blancs" : "Noirs");
+
+        //Sauvegarder le dernier déplacement
+        deplacementPrecedent = new Deplacement(casePrecedente.getPiece(), casePrecedente, mapCasePane.get(paneEcoute));
     }
 
 
@@ -356,9 +346,9 @@ public class ChessGameController implements Initializable {
         return paneToReturn;
     }
 
-    private void marquerPositionsPossibles(Position positionDepart){
-        if (plateau.deplacementsPossibles(positionDepart) != null && plateau.deplacementsPossibles(positionDepart).size() != 0) {
-            for (Position posPossible : plateau.deplacementsPossibles(positionDepart)) {
+    private void marquerPositionsPossibles(Case caseSelectionnee){
+        if (plateau.deplacementsPossibles(caseSelectionnee.getPositionCase()) != null && plateau.deplacementsPossibles(caseSelectionnee.getPositionCase()).size() != 0) {
+            for (Position posPossible : plateau.deplacementsPossibles(caseSelectionnee.getPositionCase())) {
                 Pane panePossible = trouverPaneParCase(posPossible, mapCasePane);
                 if (panePossible != null)
                     panePossible.setStyle("-fx-background-color: #4C8295;");
@@ -370,13 +360,6 @@ public class ChessGameController implements Initializable {
         for (int i = 0; i < 64; i++) {
             mapCasePane.put(panes.get(i), plateau.getCases().get(i));
         }
-    }
-
-    public void updateImagePane(Pane paneAMettreAJour, Case nouvelleCase){
-        if (nouvelleCase.getPiece()!=null)
-            paneAMettreAJour.getChildren().add(new ImageView(new Image(nouvelleCase.getPiece().getImage())));
-        else
-            paneAMettreAJour.getChildren().clear();
     }
 
     //méthode pour transmettre les cases sur les panes

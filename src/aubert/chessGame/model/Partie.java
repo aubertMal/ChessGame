@@ -31,20 +31,12 @@ public class Partie {
         return turn;
     }
 
-    public boolean effectuerDeplacement(Case ancienneCase,Case nouvelleCase, Piece pieceADeplacer){
-        boolean statutDeplacement;
-        if (pieceADeplacer.getCouleurPiece().equals(turn)) {
-            Deplacement nouveauDeplacement = new Deplacement(pieceADeplacer, ancienneCase, nouvelleCase);
-            deplacementsRealises.add(nouveauDeplacement);
-            plateau.deplacerPiece(nouveauDeplacement);
-            turn = turn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC;
-            statutDeplacement=true;
-        }
-        else {
-            System.out.println("Ce n'est pas à votre tour de jouer");
-            statutDeplacement =false;
-        }
-        return statutDeplacement;
+    public void effectuerDeplacement(Case ancienneCase,Case nouvelleCase, Piece pieceADeplacer){
+
+        Deplacement nouveauDeplacement = new Deplacement(pieceADeplacer, ancienneCase, nouvelleCase);
+        deplacementsRealises.add(nouveauDeplacement);
+        plateau.deplacerPiece(nouveauDeplacement);
+        turn = turn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC;
     }
 
     public void annulerDeplacement(Deplacement dernierDeplacement){

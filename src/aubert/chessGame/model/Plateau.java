@@ -141,12 +141,12 @@ public class Plateau {
         deplacementEnCours.getNewCase().setPiece(deplacementEnCours.getOldCase().getPiece());
         deplacementEnCours.getOldCase().setPiece(null);
 
-        for (Case caseTemp:cases) {
-            if (comparePositions(caseTemp.getPositionCase(),deplacementEnCours.getNewCase().getPositionCase()))
-                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getNewCase());
-            if (comparePositions(caseTemp.getPositionCase(), deplacementEnCours.getOldCase().getPositionCase()))
-                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getOldCase());
-        }
+//        for (Case caseTemp:cases) {
+//            if (comparePositions(caseTemp.getPositionCase(),deplacementEnCours.getNewCase().getPositionCase()))
+//                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getNewCase());
+//            if (comparePositions(caseTemp.getPositionCase(), deplacementEnCours.getOldCase().getPositionCase()))
+//                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getOldCase());
+//        }
     }
     /**
      * Met à jour la liste des positions possibles en supprimant les positions des cases occupées par une pièce de même couleur
