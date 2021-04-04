@@ -179,8 +179,6 @@ public class ChessGameController implements Initializable {
 
     private Case casePrecedente;
 
-    private Deplacement deplacementPrecedent;
-
     private List<Pane> panes = new ArrayList<>();
 
     @Override
@@ -201,7 +199,7 @@ public class ChessGameController implements Initializable {
 
         boutonAnnuler.setOnMouseClicked(mouseEvent -> {
             if (partie.getDeplacementsRealises().size()!=0){
-                partie.annulerDeplacement(deplacementPrecedent);
+                partie.annulerDeplacement();
                 refreshPanes();
                 //TODO récupérer la pièce mangée du déplacement
             }
@@ -321,16 +319,14 @@ public class ChessGameController implements Initializable {
     }
 
     private void effectuerUnDeplacement(Pane paneEcoute) {
-        partie.effectuerDeplacement(casePrecedente, mapCasePane.get(paneEcoute), casePrecedente.getPiece());
+        //effectuer un déplacement et le sauvegarder
+        partie.effectuerDeplacement(casePrecedente, mapCasePane.get(paneEcoute));
 
         //on met à jour les panes
         refreshPanes();
 
         //On passe au 2ème joueur
         tour.setText(partie.getTurn() == Couleur.BLANC ? "Blancs" : "Noirs");
-
-        //Sauvegarder le dernier déplacement
-        deplacementPrecedent = new Deplacement(casePrecedente.getPiece(), casePrecedente, mapCasePane.get(paneEcoute));
     }
 
 

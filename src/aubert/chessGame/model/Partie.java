@@ -16,7 +16,6 @@ public class Partie {
     public void creerNouvellePartie(){
 
         plateau.initPlateau();
-
     }
 
     public Plateau getPlateau() {
@@ -31,15 +30,27 @@ public class Partie {
         return turn;
     }
 
-    public void effectuerDeplacement(Case ancienneCase,Case nouvelleCase, Piece pieceADeplacer){
+    public void effectuerDeplacement(Case ancienneCase,Case nouvelleCase){
 
-        Deplacement nouveauDeplacement = new Deplacement(pieceADeplacer, ancienneCase, nouvelleCase);
+        Deplacement nouveauDeplacement;
+
+        if (nouvelleCase.getPiece()!=null)
+            nouveauDeplacement = new Deplacement(ancienneCase.getPiece(),nouvelleCase.getPiece(),ancienneCase,nouvelleCase);
+        else
+            nouveauDeplacement = new Deplacement(ancienneCase.getPiece(), ancienneCase, nouvelleCase);
+
         deplacementsRealises.add(nouveauDeplacement);
         plateau.deplacerPiece(nouveauDeplacement);
         turn = turn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC;
     }
 
-    public void annulerDeplacement(Deplacement dernierDeplacement){
+    public void annulerDeplacement(){
+        Deplacement dernierDeplacement=deplacementsRealises.get(deplacementsRealises.size()-1);
+        //on effectue le déplacement dans le sens inverse
+        effectuerDeplacement(dernierDeplacement.getNewCase(), dernierDeplacement.getOldCase());
+        //si une piève a été mangée, on la remet
+        if (dernierDeplacement.getPieceMangee()!=null)
+            dernierDeplacement.getNewCase().setPiece(dernierDeplacement.getPieceMangee());
         deplacementsRealises.remove(dernierDeplacement);
     }
 }

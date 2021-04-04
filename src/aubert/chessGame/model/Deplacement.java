@@ -12,6 +12,17 @@ public class Deplacement {
         this.newCase = newCase;
     }
 
+    public Deplacement(Piece pieceDeplacee, Piece pieceMangee, Case oldCase, Case newCase) {
+        this.pieceDeplacee = pieceDeplacee;
+        this.pieceMangee = pieceMangee;
+        this.oldCase = oldCase;
+        this.newCase = newCase;
+    }
+
+    public Piece getPieceMangee() {
+        return pieceMangee;
+    }
+
     public Piece getPieceDeplacee() {
         return pieceDeplacee;
     }
