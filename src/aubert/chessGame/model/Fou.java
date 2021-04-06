@@ -1,5 +1,6 @@
 package aubert.chessGame.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Fou extends Piece{
@@ -9,6 +10,12 @@ public class Fou extends Piece{
 
     @Override
     public List<Position> deplacementsPossibles(Position position){
-        return null;
+        List <Position> positionsPossibles = new ArrayList<>();
+        int posX = position.getX();
+        int posY = position.getY();
+
+
+
+        return positionsPossibles;
     }
 }

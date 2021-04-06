@@ -1,5 +1,7 @@
 package aubert.chessGame.model;
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,18 +122,27 @@ public class Plateau {
         List<Position> positionsPossibles = new ArrayList<>();
 
         for (Case caseEchiquier:cases) {
-            if (comparePositions(caseEchiquier.getPositionCase(), positionCliquee)){
+            if (Position.comparePositions(caseEchiquier.getPositionCase(), positionCliquee)){
                 if (caseEchiquier.getPiece()!=null) {
                     positionsPossibles = caseEchiquier.getPiece().deplacementsPossibles(positionCliquee);
+
                     //on enlève les positions des pièces de même couleur de la liste
-                    updatePositionsPossibles(caseEchiquier.getPiece().getCouleurPiece(),positionsPossibles);
+                    updatePositionsPossibles(caseEchiquier,positionsPossibles);
                 }
             }
         }
         return positionsPossibles;
     }
 
+    private Case trouverCaseParPosition(Position positionARechercher){
+        Case caseAretourner = null;
 
+        for (Case caseAREchercher:cases) {
+            if (Position.comparePositions(caseAREchercher.getPositionCase(),positionARechercher))
+                caseAretourner = caseAREchercher;
+        }
+        return caseAretourner;
+    }
     /**
      * Met à jour la liste des cases du plateau suite au déplacement effectué
      *
@@ -140,45 +151,70 @@ public class Plateau {
     public void deplacerPiece(Deplacement deplacementEnCours){
         deplacementEnCours.getNewCase().setPiece(deplacementEnCours.getOldCase().getPiece());
         deplacementEnCours.getOldCase().setPiece(null);
-
-//        for (Case caseTemp:cases) {
-//            if (comparePositions(caseTemp.getPositionCase(),deplacementEnCours.getNewCase().getPositionCase()))
-//                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getNewCase());
-//            if (comparePositions(caseTemp.getPositionCase(), deplacementEnCours.getOldCase().getPositionCase()))
-//                cases.set(cases.indexOf(caseTemp), deplacementEnCours.getOldCase());
-//        }
     }
+
     /**
      * Met à jour la liste des positions possibles en supprimant les positions des cases occupées par une pièce de même couleur
      *
      * @param    positionsPossibles      la liste initiale des positions possibles
-     * @param    couleurPiece            la couleur de la pièce à bouger
+     * @param    caseDepart            la couleur de la pièce à bouger
      * @return   positionsPossibles      la liste de positions à jour
      */
 
-    private void updatePositionsPossibles(Couleur couleurPiece, List<Position> positionsPossibles) {
+    private void updatePositionsPossibles(Case caseDepart, List<Position> positionsPossibles) {
         List<Position> positionsToRemove = new ArrayList<>();
         for (Position posPossible:positionsPossibles) {
-            for (Case casePossible:cases) {
-                if (comparePositions(posPossible,casePossible.getPositionCase()))
-                    if (casePossible.getPiece()!=null && casePossible.getPiece().getCouleurPiece()==couleurPiece)
-                        positionsToRemove.add(posPossible);
-            }
+            Case casePossible = trouverCaseParPosition(posPossible);
+            //enlever les cases où il y a des pièces de même couleur
+            if (casePossible!=null && casePossible.getPiece()!=null && casePossible.getPiece().getCouleurPiece()==caseDepart.getPiece().getCouleurPiece())
+                positionsToRemove.add(posPossible);
+
         }
+        //enlever les déplacements que le pion n'a pas le droit de faire
+        if (caseDepart.getPiece()!=null && caseDepart.getPiece().getNom().equals("Pion"))
+            positionsToRemove.addAll(filtrerDeplacementsPions(caseDepart,positionsPossibles));
+
         positionsPossibles.removeAll(positionsToRemove);
     }
 
-    /**
-     * vérifie si deux positions sont égales
-     *
-     * @param    position1      1ère position
-     * @param    position2      2ème position
-     * @return   true si les positions sont égales, false sinon
-     */
-    public boolean comparePositions(Position position1, Position position2){
-        if (position1.getX() == position2.getX() && position1.getY()== position2.getY())
-            return true;
+    private List<Position> filtrerDeplacementsPions(Case caseDepart,List<Position> positionsPossibles) {
+        List<Position> positionsToRemove = new ArrayList<>();
+        Position positionDiagonale=null;
+        Position positionOccupee = null;
+
+        //enlever les cases où il n y a pas de pièce à manger en diagonale pour les pions
+        if (caseDepart.getPiece()!=null && caseDepart.getPiece().getCouleurPiece()==Couleur.BLANC)
+            positionDiagonale = new Position(caseDepart.getPositionCase().getX()+1, caseDepart.getPositionCase().getY()+1);
         else
-            return false;
+            positionDiagonale = new Position(caseDepart.getPositionCase().getX()-1, caseDepart.getPositionCase().getY()-1);
+        if (trouverCaseParPosition(positionDiagonale).getPiece()==null){
+            for (Position positionDiag:positionsPossibles) {
+                if (Position.comparePositions(positionDiag,positionDiagonale))
+                    positionsToRemove.add(positionDiag);
+            }
+        }
+        if (caseDepart.getPiece()!=null && caseDepart.getPiece().getCouleurPiece()==Couleur.BLANC)
+            positionDiagonale = new Position(caseDepart.getPositionCase().getX()-1, caseDepart.getPositionCase().getY()+1);
+        else
+            positionDiagonale = new Position(caseDepart.getPositionCase().getX()+1, caseDepart.getPositionCase().getY()-1);
+
+        if (trouverCaseParPosition(positionDiagonale).getPiece()==null){
+            for (Position positionDiag:positionsPossibles) {
+                if (Position.comparePositions(positionDiag,positionDiagonale))
+                    positionsToRemove.add(positionDiag);
+            }
+        }
+        //le pion ne peut pas manger une pièce devant lui
+        if (caseDepart.getPiece()!=null && caseDepart.getPiece().getCouleurPiece()==Couleur.BLANC)
+            positionOccupee = new Position(caseDepart.getPositionCase().getX(), caseDepart.getPositionCase().getY()+1);
+        else
+            positionOccupee = new Position(caseDepart.getPositionCase().getX(), caseDepart.getPositionCase().getY()-1);
+        if (trouverCaseParPosition(positionOccupee).getPiece()!=null){
+            for (Position positionDiag:positionsPossibles) {
+                if (Position.comparePositions(positionDiag,positionOccupee))
+                    positionsToRemove.add(positionDiag);
+            }
+        }
+        return positionsToRemove;
     }
 }

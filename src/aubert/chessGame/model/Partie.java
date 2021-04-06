@@ -41,6 +41,7 @@ public class Partie {
 
         deplacementsRealises.add(nouveauDeplacement);
         plateau.deplacerPiece(nouveauDeplacement);
+
         turn = turn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC;
     }
 

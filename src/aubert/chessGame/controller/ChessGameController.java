@@ -310,6 +310,7 @@ public class ChessGameController implements Initializable {
                         infoPartie.setText("CE N'EST PAS A VOTRE TOUR DE JOUER!");
                     } else{
                         initGridPane();//on enlève le marquage
+
                         marquerPositionsPossibles(mapCasePane.get(paneEcoute));
                     }
                 }
@@ -333,7 +334,7 @@ public class ChessGameController implements Initializable {
     private Pane trouverPaneParCase(Position position, HashMap<Pane, Case> map) {
         Pane paneToReturn = new Pane();
         for (Map.Entry<Pane, Case> entry : this.mapCasePane.entrySet()) {
-            if (plateau.comparePositions(position, entry.getValue().getPositionCase())) {
+            if (Position.comparePositions(position, entry.getValue().getPositionCase())) {
                 paneToReturn = entry.getKey();
                 return paneToReturn;
             }
@@ -362,10 +363,10 @@ public class ChessGameController implements Initializable {
     //pour chaque case, si on a une pièce on va l'afficher dans le pane sinon on fait un clear
     private void refreshPanes(){
         for (Map.Entry <Pane,Case> entry:mapCasePane.entrySet()) {
+            //on fait un clear avant sinon les images vont se superposer
+            entry.getKey().getChildren().clear();
             if (entry.getValue().getPiece()!=null)
                 entry.getKey().getChildren().add(new ImageView(new Image(entry.getValue().getPiece().getImage())));
-            else
-                entry.getKey().getChildren().clear();
         }
     }
 

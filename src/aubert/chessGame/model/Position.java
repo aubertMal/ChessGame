@@ -26,4 +26,11 @@ public class Position {
         this.y = y;
     }
 
+    public static boolean comparePositions(Position position1, Position position2){
+        if (position1.getX() == position2.getX() && position1.getY()== position2.getY())
+            return true;
+        else
+            return false;
+    }
+
 }
